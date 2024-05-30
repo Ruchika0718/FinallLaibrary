@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - UrLMS</title>
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-all.css" rel="stylesheet" />
+    <link href="~/Content/lmscustom.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/fonts/icomoon/style.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/css/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="~/css/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="~/css/jquery.fancybox.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/fonts/flaticon/font/_flaticon.css" rel="stylesheet" />
+    <link href="~/css/aos.css" rel="stylesheet" />
+    <link href="~/css/jquery.mb.YTPlayer.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body style="padding:unset">
+    <div class="py-2 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-9 d-none d-lg-block">
+                    <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> Have a questions?</a>
+                    <a href="#" class="small mr-3"><span class="icon-phone2 mr-2"></span>9817818742</a>
+                    <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> bookhaven@gmail.com</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <div class="site-logo">
+
+                    <img src="~/images/logo2.png" style="height:60px; width:150%" />
+                </div>
+                <div class="mr-auto">
+                    <nav class="site-navigation position-relative text-right" role="navigation">
+                        <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                            <li class="active">
+                                @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link icon", style = "display:inline" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("About", "About", "Home", new { @class = "nav-link icon", style = "display:inline" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link icon", style = "display:inline" })
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item btn-sm btn-primary">
+                        <i class="fas fa-sign-in-alt" style="color:white;"></i>
+                        @Html.ActionLink("Login", "Login", "Home", new { @class = "nav-link icon", style = "display:inline" })
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <div style="padding-left:20px; padding-right:20px;">
+        @RenderBody()
+    </div>
+    <div>
+
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <p class="mb-4">
+                        <img src="~/images/logo2.png" style="height:60px; width:50%">
+                    </p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nemo minima qui dolor, iusto iure.</p>
+                    <p><a href="#">Learn More</a></p>
+                </div>
+
+
+                <div class="col-lg-3">
+                    <h3 class="footer-heading"><span>Contact</span></h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Support Community</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Share Your Story</a></li>
+                        <li><a href="#">Our Supporters</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="copyright">
+                        <p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved |  <i class="icon-heart" aria-hidden="true"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.stellar.min.js"></script>
+    <script src="~/js/jquery.countdown.min.js"></script>
+    <script src="~/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/js/jquery.easing.1.3.js"></script>
+    <script src="~/js/aos.js"></script>
+    <script src="~/js/jquery.fancybox.min.js"></script>
+    <script src="~/js/jquery.sticky.js"></script>
+    <script src="~/js/jquery.mb.YTPlayer.min.js"></script>
+    <script src="~/js/main.js"></script>
+</body>
+</html>

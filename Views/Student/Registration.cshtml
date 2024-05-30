@@ -1,0 +1,129 @@
+﻿@model FinallLaibrary.Models.tblUser
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Registration</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/fontawesome-all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <style>
+        .label-bold {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="padding:unset">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            <br />
+            <br />
+            <div class="col-md-4 offset-sm-4 mt-5 mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-book"></i>Registration
+                    </div>
+                    <div class="card-body offset-sm-1">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <form class="container-fluid">
+                            <div class="form-group fw-bold">
+                                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "" })
+                                <div class="input-group">
+
+                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the name" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.UserGender, htmlAttributes: new { @class = "label-bold" })
+                                <div class="input-group">
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.UserGender, "Male", new { @id = "Male", @class = "form-check-input" })
+                                        <label class="form-check-label" for="Male">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        @Html.RadioButtonFor(m => m.UserGender, "Female", new { @id = "Female", @class = "form-check-input" })
+                                        <label class="form-check-label" for="Female">Female</label>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.UserGender, "", new { @class = "text-danger label-bold" })
+                            </div>
+
+
+                            <div class="form-group fw-bold">
+                                @Html.LabelFor(model => model.UserDep, htmlAttributes: new { @class = "control-label" })
+
+                                @Html.DropDownListFor(model => model.UserDep, new List<SelectListItem> {
+                                new SelectListItem{ Text="MCA", Value="MCA"},
+                                new SelectListItem{ Text="MCOM", Value="MCOM"},
+                                new SelectListItem{ Text="MBA", Value="MBA"},
+                                new SelectListItem{ Text="BE", Value="BE"},
+                                new SelectListItem{ Text="MSCIT", Value="MSCIT"},
+                                new SelectListItem{ Text="It", Value="It"},
+                               }, "Select department", new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.UserDep, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group fw-bold">
+                                @Html.LabelFor(model => model.UserAdmNo, htmlAttributes: new { @class = "" })
+                                <div class="input-group">
+
+                                    @Html.EditorFor(model => model.UserAdmNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the enrollment no." } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.UserAdmNo, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group fw-bold">
+                                @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "" })
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the email" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group fw-bold">
+                                @Html.LabelFor(model => model.UserPass, htmlAttributes: new { @class = "" })
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.UserPass, new { htmlAttributes = new { @class = "form-control ", placeholder = "Enter the password", type = "password" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.UserPass, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <p class="text-danger">@ViewBag.Message</p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer fw-bold">
+                        <div class="col-10 offset-1">
+                            <button type="submit" value="Registration" class="btn btn-sm btn-block btn-primary">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Register
+                            </button>
+                        </div>
+                    </div>
+                    <label style="margin-left:10px;">Already have an account?</label>
+                    <div style="text-decoration: none; margin-left: 10px;">
+                        @Html.ActionLink("Login", "Login")
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
+

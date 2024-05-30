@@ -1,0 +1,93 @@
+﻿@model IEnumerable<FinallLaibrary.Models.tblUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h4>Book list</h4>
+<hr />
+
+<br />
+<br />
+
+@*External stylesheet for data table plugins*@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        <span class="fs-5">User List</span>
+
+        <a href="../User/Create" class="btn btn-outline-success float-end"> <i class="fa fa-plus"></i>Add New</a>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-bordered text-center" id="example">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Department</th>
+                    <th>Enrollment No.</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 1;}
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            @{ i++;}
+                            <td>@item.UserName</td>
+                            <td>@item.UserGender</td>
+                            <td>@item.UserDep</td>
+                            <td>@item.UserAdmNo</td>
+                            <td>@item.UserEmail</td>
+                            <td>@item.UserPass</td>
+                            <td>
+                                <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Edit", "User", new { id = item.UserId })'">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-outline-success" onclick="location.href='@Url.Action("Details", "User", new { id = item.UserId })'">
+                                    <i class="fas fa-info-circle iconop"></i> Details
+                                </button>
+                                <button class="btn btn-outline-danger" onclick="location.href='@Url.Action("Delete", "User", new { id = item.UserId })'">
+                                    <i class="fas fa-trash iconop"></i> Delete
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="11">No data found</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+@if (Session["bookAddMsg"] != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@Session["userAddMsg"]");
+                window.location.href = "/User/UserAddMsg";
+            };
+    </script>
+}
+
