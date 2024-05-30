@@ -11,7 +11,8 @@ namespace FinallLaibrary.Controllers
         // GET: ruchi
         public ActionResult Index()
         {
-            return View("Hello Ruhchi how s");
+            return View("Hello Ruhchi how how is you");
+            
         }
 
     }
