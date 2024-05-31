@@ -53,5 +53,9 @@ namespace FinallLaibrary.Controllers
             {
                 return View();
             }
+        public ActionResult hello()
+        {
+            return View();
         }
+    }
     }
