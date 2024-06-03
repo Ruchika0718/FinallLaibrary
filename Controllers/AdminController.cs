@@ -7,8 +7,8 @@ using System.Web.Mvc;
 
 namespace FinallLaibrary.Controllers
 {
-    
-        // GET: Admin
+
+    // GET: Admin
         public class AdminController : Controller
         {
             LaibraryManagementEntities user = new LaibraryManagementEntities();

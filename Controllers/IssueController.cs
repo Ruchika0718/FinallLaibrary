@@ -8,8 +8,7 @@ using System.Web.Mvc;
 
 namespace FinallLaibrary.Controllers
 {
-   
-        public class IssueController : Controller
+    public class IssueController : Controller
         {
             static int userId;
             static string userName;
@@ -25,7 +24,7 @@ namespace FinallLaibrary.Controllers
 
                 int userId = (int)Session["userId"];
                 string userName = Session["userName"]?.ToString();
-
+                
                 using (var db = new LaibraryManagementEntities())
                 {
                     tblUser user = db.tblUsers.Find(userId);

@@ -8,9 +8,10 @@ using System.Web.Mvc;
 
 namespace FinallLaibrary.Controllers
 {
+    //[Authorize]
+
     public class BookController : Controller
     {
-        // GET: Book
         LaibraryManagementEntities book = new LaibraryManagementEntities();
 
 

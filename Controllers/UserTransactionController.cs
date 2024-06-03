@@ -10,8 +10,7 @@ namespace FinallLaibrary.Controllers
 {
     public class UserTransactionController : Controller
     {
-        // GET: UserTransaction
-
+       
         static int userId;
 
         LaibraryManagementEntities transDb = new LaibraryManagementEntities();

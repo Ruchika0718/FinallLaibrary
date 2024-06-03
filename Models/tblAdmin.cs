@@ -11,12 +11,26 @@ namespace FinallLaibrary.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblAdmin
     {
+
+
         public int AdminId { get; set; }
+        [DisplayName("Name")]
+        [Required(ErrorMessage = "Please enter name.")]
         public string AdminName { get; set; }
+        [DisplayName("Email")]
+        [Required(ErrorMessage = "Please enter email.")]
+
         public string AdminEmail { get; set; }
+        [DisplayName("Password")]
+        [Required(ErrorMessage = "Please enter password.")]
+
         public string AdminPass { get; set; }
+
+
     }
 }

@@ -6,6 +6,9 @@
 
 }
 <br />
+<head>
+    <title>Add Book</title>
+</head>
 <h4>Add book</h4>
 <hr />
 @using (Html.BeginForm())
@@ -94,7 +97,6 @@
     </div>
     <br />
 }
-
 <div class="btn btn-sm btn-secondary" data-toggle='tooltip' title='Back to book list'>
     <i class="fas fa-long-arrow-alt-left"></i>
     @Html.ActionLink("Back", "Index", null, new { @class = "", style = "text-decoration:none; color: white" })

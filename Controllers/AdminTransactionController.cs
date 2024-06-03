@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace FinallLaibrary.Controllers
 {
+   // [Authorize]
     public class AdminTransactionController : Controller
     {
         private LaibraryManagementEntities transDb = new LaibraryManagementEntities();

@@ -8,6 +8,8 @@ using System.Web.Mvc;
 
 namespace FinallLaibrary.Controllers
 {
+    //[Authorize]
+
     public class UserController : Controller
     {
 
