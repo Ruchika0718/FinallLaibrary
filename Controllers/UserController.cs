@@ -82,28 +82,46 @@ namespace FinallLaibrary.Controllers
                 return View(tblUser);
             }
         }
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            else
-            {
-                tblUser tblUser = user.tblUsers.Find(id);
-                return View(tblUser);
-            }
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+        //    }
+        //    else
+        //    {
+        //        tblUser tblUser = user.tblUsers.Find(id);
+        //        return View(tblUser);
+        //    }
+        //}
+        //[HttpPost]
         [HttpPost]
-        public ActionResult Delete(int id)
+        public JsonResult Delete(int id)
         {
+            try
+            {
+                // Attempt to find and delete the user
+                tblUser tblUser = user.tblUsers.Find(id);
+                if (tblUser != null)
+                {
+                    user.tblUsers.Remove(tblUser);
+                    user.SaveChanges();
 
-            Session["userAddMsg"] = "User Deleted successfully";
-            tblUser tblUser = user.tblUsers.Find(id);
-            user.tblUsers.Remove(tblUser);
-            user.SaveChanges();
-            return RedirectToAction("Index", "User");
-
+                    // Return success message
+                    return Json(new { success = true, message = "User deleted successfully." });
+                }
+                else
+                {
+                    // User not found
+                    return Json(new { success = false, message = "User not found." });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that occur during the delete process
+                return Json(new { success = false, message = "An error occurred: " + ex.Message });
+            }
         }
+
     }
 }

@@ -11,8 +11,7 @@ using System.Data.Entity;
 
 namespace FinallLaibrary.Controllers
 {
-    //[Authorize]
-
+   // [Authorize]
     public class StudentController : Controller
     {
         // GET: Student

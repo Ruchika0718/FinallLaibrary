@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LaibraryManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LaibraryManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblAdmins">
           <Key>
             <PropertyRef Name="AdminId" />
@@ -27,7 +27,7 @@
           <Property Name="BookPubName" Type="nvarchar" MaxLength="50" />
           <Property Name="BookISBN" Type="nvarchar" MaxLength="50" />
           <Property Name="Copyright" Type="int" />
-          <Property Name="DateAdded" Type="char" MaxLength="10" />
+          <Property Name="DateAdded" Type="datetime" />
           <Property Name="Status" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="tblTransaction">
@@ -62,8 +62,7 @@
           <EntitySet Name="tblTransaction" EntityType="Self.tblTransaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LaibraryManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -75,22 +74,6 @@
           <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdminEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdminPass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="tblBook">
-          <Key>
-            <PropertyRef Name="BookId" />
-          </Key>
-          <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BookCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BookAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BookCopies" Type="Int32" />
-          <Property Name="BookPub" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BookPubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BookISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Copyright" Type="Int32" />
-          <Property Name="DateAdded" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblTransaction">
           <Key>
@@ -120,10 +103,26 @@
         </EntityType>
         <EntityContainer Name="LaibraryManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblAdmins" EntityType="Self.tblAdmin" />
-          <EntitySet Name="tblBooks" EntityType="Self.tblBook" />
           <EntitySet Name="tblTransactions" EntityType="Self.tblTransaction" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="tblBooks" EntityType="LaibraryManagementModel.tblBook" />
         </EntityContainer>
+        <EntityType Name="tblBook">
+          <Key>
+            <PropertyRef Name="BookId" />
+          </Key>
+          <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookCopies" Type="Int32" />
+          <Property Name="BookPub" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookPubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Copyright" Type="Int32" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -137,23 +136,6 @@
                 <ScalarProperty Name="AdminName" ColumnName="AdminName" />
                 <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
                 <ScalarProperty Name="AdminPass" ColumnName="AdminPass" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblBooks">
-            <EntityTypeMapping TypeName="LaibraryManagementModel.tblBook">
-              <MappingFragment StoreEntitySet="tblBooks">
-                <ScalarProperty Name="BookId" ColumnName="BookId" />
-                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
-                <ScalarProperty Name="BookCategory" ColumnName="BookCategory" />
-                <ScalarProperty Name="BookAuthor" ColumnName="BookAuthor" />
-                <ScalarProperty Name="BookCopies" ColumnName="BookCopies" />
-                <ScalarProperty Name="BookPub" ColumnName="BookPub" />
-                <ScalarProperty Name="BookPubName" ColumnName="BookPubName" />
-                <ScalarProperty Name="BookISBN" ColumnName="BookISBN" />
-                <ScalarProperty Name="Copyright" ColumnName="Copyright" />
-                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -182,6 +164,23 @@
                 <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
                 <ScalarProperty Name="UserPass" ColumnName="UserPass" />
                 <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBooks">
+            <EntityTypeMapping TypeName="LaibraryManagementModel.tblBook">
+              <MappingFragment StoreEntitySet="tblBooks">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Copyright" ColumnName="Copyright" />
+                <ScalarProperty Name="BookISBN" ColumnName="BookISBN" />
+                <ScalarProperty Name="BookPubName" ColumnName="BookPubName" />
+                <ScalarProperty Name="BookPub" ColumnName="BookPub" />
+                <ScalarProperty Name="BookCopies" ColumnName="BookCopies" />
+                <ScalarProperty Name="BookAuthor" ColumnName="BookAuthor" />
+                <ScalarProperty Name="BookCategory" ColumnName="BookCategory" />
+                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

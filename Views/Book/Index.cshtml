@@ -65,15 +65,16 @@
                             <td>@item.Status</td>
 
                             <td>
-                                <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Edit", "Book", new { id = item.BookId })'">
-                                    <i class="fas fa-edit"></i> Edit
+                                <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Edit", "Book", new { id = item.BookId })'" title="Edit">
+                                    <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn btn-outline-success" onclick="location.href='@Url.Action("Details", "Book", new { id = item.BookId })'">
-                                    <i class="fas fa-info-circle iconop"></i> Details
+                                <button class="btn btn-outline-success" onclick="location.href='@Url.Action("Details", "Book", new { id = item.BookId })'" title="Details">
+                                    <i class="fas fa-info-circle iconop"></i>
                                 </button>
-                                <button class="btn btn-outline-danger" onclick="location.href='@Url.Action("Delete", "Book", new { id = item.BookId })'">
-                                    <i class="fas fa-trash iconop"></i> Delete
+                                <button class="btn btn-outline-danger" onclick="Delete(@item.BookId)" title="Delete">
+                                    <i class="fas fa-trash iconop"></i>
                                 </button>
+
                             </td>
                         </tr>
                     }
@@ -93,6 +94,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if (Session["bookAddMsg"] != null)
 {
     <script type="text/javascript">
@@ -102,4 +104,51 @@
             };
     </script>
 }
+
+<script>
+    function Delete(bookId) {
+        Swal.fire({
+            title: 'Are you sure you want to delete?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Book/Delete/' + bookId,
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then(function () {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                text: response.message,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log('AJAX error: ', textStatus, errorThrown);  // Log the error to the console
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Some error occurred: ' + textStatus + ' ' + errorThrown,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            }
+        });
+    }
+</script>
+
 

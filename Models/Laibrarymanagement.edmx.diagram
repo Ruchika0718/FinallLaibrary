@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="43100aaa7e3046908480f8363eea13fd" Name="Diagram1">
         <EntityTypeShape EntityType="LaibraryManagementModel.tblAdmin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LaibraryManagementModel.tblBook" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LaibraryManagementModel.tblTransaction" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LaibraryManagementModel.tblUser" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaibraryManagementModel.tblBook" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -22,7 +22,7 @@
     <Property Name="BookPubName" Type="nvarchar" MaxLength="50" />
     <Property Name="BookISBN" Type="nvarchar" MaxLength="50" />
     <Property Name="Copyright" Type="int" />
-    <Property Name="DateAdded" Type="char" MaxLength="10" />
+    <Property Name="DateAdded" Type="datetime" />
     <Property Name="Status" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="tblTransaction">

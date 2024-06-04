@@ -107,11 +107,5 @@ namespace FinallLaibrary.Controllers
                 return RedirectToAction("Index", "Issue", new { userId = userId, userName = userName });
 
             }
-
-            public ActionResult RequestAlert()
-            {
-                Session.Remove("requestMsg");
-                return RedirectToAction("Index", "Borrow", new { userId = userId, userName = userName });
-            }
         }
     }

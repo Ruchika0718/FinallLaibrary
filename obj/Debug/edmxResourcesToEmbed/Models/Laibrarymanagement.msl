@@ -11,23 +11,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblBooks">
-      <EntityTypeMapping TypeName="LaibraryManagementModel.tblBook">
-        <MappingFragment StoreEntitySet="tblBooks">
-          <ScalarProperty Name="BookId" ColumnName="BookId" />
-          <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
-          <ScalarProperty Name="BookCategory" ColumnName="BookCategory" />
-          <ScalarProperty Name="BookAuthor" ColumnName="BookAuthor" />
-          <ScalarProperty Name="BookCopies" ColumnName="BookCopies" />
-          <ScalarProperty Name="BookPub" ColumnName="BookPub" />
-          <ScalarProperty Name="BookPubName" ColumnName="BookPubName" />
-          <ScalarProperty Name="BookISBN" ColumnName="BookISBN" />
-          <ScalarProperty Name="Copyright" ColumnName="Copyright" />
-          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tblTransactions">
       <EntityTypeMapping TypeName="LaibraryManagementModel.tblTransaction">
         <MappingFragment StoreEntitySet="tblTransaction">
@@ -53,6 +36,23 @@
           <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
           <ScalarProperty Name="UserPass" ColumnName="UserPass" />
           <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBooks">
+      <EntityTypeMapping TypeName="LaibraryManagementModel.tblBook">
+        <MappingFragment StoreEntitySet="tblBooks">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="Copyright" ColumnName="Copyright" />
+          <ScalarProperty Name="BookISBN" ColumnName="BookISBN" />
+          <ScalarProperty Name="BookPubName" ColumnName="BookPubName" />
+          <ScalarProperty Name="BookPub" ColumnName="BookPub" />
+          <ScalarProperty Name="BookCopies" ColumnName="BookCopies" />
+          <ScalarProperty Name="BookAuthor" ColumnName="BookAuthor" />
+          <ScalarProperty Name="BookCategory" ColumnName="BookCategory" />
+          <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+          <ScalarProperty Name="BookId" ColumnName="BookId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

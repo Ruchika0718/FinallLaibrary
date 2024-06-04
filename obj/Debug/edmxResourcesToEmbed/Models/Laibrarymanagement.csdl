@@ -9,22 +9,6 @@
     <Property Name="AdminEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="AdminPass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="tblBook">
-    <Key>
-      <PropertyRef Name="BookId" />
-    </Key>
-    <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BookCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BookAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BookCopies" Type="Int32" />
-    <Property Name="BookPub" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BookPubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BookISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Copyright" Type="Int32" />
-    <Property Name="DateAdded" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="tblTransaction">
     <Key>
       <PropertyRef Name="TranId" />
@@ -53,8 +37,24 @@
   </EntityType>
   <EntityContainer Name="LaibraryManagementEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tblAdmins" EntityType="Self.tblAdmin" />
-    <EntitySet Name="tblBooks" EntityType="Self.tblBook" />
     <EntitySet Name="tblTransactions" EntityType="Self.tblTransaction" />
     <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <EntitySet Name="tblBooks" EntityType="LaibraryManagementModel.tblBook" />
   </EntityContainer>
+  <EntityType Name="tblBook">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookCopies" Type="Int32" />
+    <Property Name="BookPub" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookPubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Copyright" Type="Int32" />
+    <Property Name="DateAdded" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>
