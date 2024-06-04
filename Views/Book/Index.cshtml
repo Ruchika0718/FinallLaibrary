@@ -10,7 +10,7 @@
         Books List
     </title>
 </head>
-<h4>Book list</h4>
+<h4>Book list</h4>x
 <hr />
 <br />
 <br />
@@ -27,74 +27,137 @@
         <a href="../Book/Create" class="btn btn-outline-success float-end"> <i class="fa fa-plus"></i>Add New</a>
     </div>
     <div class="card-body table-responsive">
-        <table class="table table-bordered text-center" id="example">
-            <thead>
+        <table width="100%" class="table-sm table-hover table-bordered" id="example">
+            <thead class="bg-success text-light">
                 <tr>
-                    <th>Sr. No.</th>
-                    <th>Book Title</th>
-                    <th>Category</th>
-                    <th>Author</th>
-                    <th>Copies</th>
-                    <th>Publisher</th>
-                    <th>Name</th>
-                    <th>No.</th>
-                    <th>Copyright</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookCategory)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookAuthor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookCopies)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookPub)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookPubName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookISBN)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Copyright)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateAdded)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                @{ int i = 1;}
-                @if (Model != null)
-                {
-                    foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@i</td>
-                            @{ i++;}
-                            <td>@item.BookTitle</td>
-                            <td>@item.BookCategory</td>
-                            <td>@item.BookAuthor</td>
-                            <td>@item.BookCopies</td>
-                            <td>@item.BookPub</td>
-                            <td>@item.BookPubName</td>
-                            <td>@item.BookISBN</td>
-                            <td>@item.Copyright</td>
-                            <td>@item.DateAdded</td>
-                            <td>@item.Status</td>
-
-                            <td>
-                                <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Edit", "Book", new { id = item.BookId })'" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-outline-success" onclick="location.href='@Url.Action("Details", "Book", new { id = item.BookId })'" title="Details">
-                                    <i class="fas fa-info-circle iconop"></i>
-                                </button>
-                                <button class="btn btn-outline-danger" onclick="Delete(@item.BookId)" title="Delete">
-                                    <i class="fas fa-trash iconop"></i>
-                                </button>
-
-                            </td>
-                        </tr>
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="11">No data found</td>
-                    </tr>
-                }
+                <tr>
+                    <th>
+                        BookTitle
+                    </th>
+                    <th>
+                        category
+                    </th>
+                    <th>
+                        Author
+                    </th>
+                    <th>
+                        Copies
+                    </th>
+                    <th>
+                        Publisher
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        No.
+                    </th>
+                    <th>
+                        Copyright
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
             </tbody>
         </table>
     </div>
 </div>
 
 <br />
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "ajax": {
+                "url": "/Book/GetAll",
+                "type": "get",
+                "datatype": "json",
+            },
+            "columns": [
+                { "data": "BookTitle" },
+                { "data": "BookCategory" },
+                { "data": "BookAuthor" },
+                { "data": "BookCopies" },
+                { "data": "BookPub" },
+                { "data": "BookPubName" },
+                { "data": "BookISBN" },
+                { "data": "Copyright" },
+                {
+                    "data": "DateAdded",
+                    "render": function (data) {
+                        var date = new Date(parseInt(data.substr(6)));
+                        return date.toLocaleDateString();
+                    }
+                },
+                { "data": "Status" },
+                {
+                    "data": "BookId", "render": function (idhere) {
+                        return "<a class='btn btn-sm btn-outline-primary text-blue' data-toggle='tooltip' title='Edit' href='@Url.Action("Edit", "Book")/" + idhere + "'> <i class='fas fa-edit'></i> </a> " +
+                               "<a class='btn btn-sm btn-outline-success text-success' data-toggle='tooltip' title=' Details' href='@Url.Action("Details", "Book")/" + idhere + "'> <i class='fas fa-info-circle'></i> </a> " +
+                               "<a class='btn btn-sm btn-outline-danger text-danger' data-toggle='tooltip' title='Delete ' onclick='Delete(" + idhere + ")'> <i class='fas fa-trash'></i> </a>";
+                    },
+                    "orderable": false,
+                    "width": "245px"
+                }
+            ],
+            "language": {
+                "emptyTable": "No data found, Add new items"
+            }
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+
+}
+
 @if (Session["bookAddMsg"] != null)
 {
     <script type="text/javascript">
@@ -150,5 +213,3 @@
         });
     }
 </script>
-
-

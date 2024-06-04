@@ -22,5 +22,6 @@ namespace FinallLaibrary.Models
         public string UserEmail { get; set; }
         public string UserPass { get; set; }
         public string ResetCode { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

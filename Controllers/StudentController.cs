@@ -11,21 +11,20 @@ using System.Data.Entity;
 
 namespace FinallLaibrary.Controllers
 {
-   // [Authorize]
+    // [Authorize]
     public class StudentController : Controller
     {
         // GET: Student
         LaibraryManagementEntities user = new LaibraryManagementEntities();
 
 
-     
+
 
 
         public ActionResult Registration()
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Registration(tblUser tbl)
         {
@@ -34,10 +33,11 @@ namespace FinallLaibrary.Controllers
                 var existingUser = user.tblUsers.SingleOrDefault(u => u.UserEmail == tbl.UserEmail);
                 if (existingUser != null)
                 {
-                    ModelState.AddModelError("UserEmail", " Please enter a different email.");
+                    ModelState.AddModelError("UserEmail", "Please enter a different email.");
                     return View(tbl);
                 }
-                var student = new tblUser
+
+                var newUser = new tblUser
                 {
                     UserName = tbl.UserName,
                     UserGender = tbl.UserGender,
@@ -45,9 +45,10 @@ namespace FinallLaibrary.Controllers
                     UserAdmNo = tbl.UserAdmNo,
                     UserEmail = tbl.UserEmail,
                     UserPass = tbl.UserPass,
+                    IsActive = true  // Set IsActive to true by default
                 };
 
-                user.tblUsers.Add(tbl);
+                user.tblUsers.Add(newUser);
                 user.SaveChanges();
 
                 return RedirectToAction("Login", "Student");
@@ -55,6 +56,36 @@ namespace FinallLaibrary.Controllers
 
             return View(tbl);
         }
+
+        //[HttpPost]
+        //public ActionResult Registration(tblUser tbl)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var existingUser = user.tblUsers.SingleOrDefault(u => u.UserEmail == tbl.UserEmail);
+        //        if (existingUser != null)
+        //        {
+        //            ModelState.AddModelError("UserEmail", " Please enter a different email.");
+        //            return View(tbl);
+        //        }
+        //        var student = new tblUser
+        //        {
+        //            UserName = tbl.UserName,
+        //            UserGender = tbl.UserGender,
+        //            UserDep = tbl.UserDep,
+        //            UserAdmNo = tbl.UserAdmNo,
+        //            UserEmail = tbl.UserEmail,
+        //            UserPass = tbl.UserPass,
+        //        };
+
+        //        user.tblUsers.Add(tbl);
+        //        user.SaveChanges();
+
+        //        return RedirectToAction("Login", "Student");
+        //    }
+
+        //    return View(tbl);
+        //}
         public ActionResult Login()
         {
             return View();
@@ -70,21 +101,30 @@ namespace FinallLaibrary.Controllers
 
             using (var db = new LaibraryManagementEntities())
             {
-                var adm = await db.tblUsers.SingleOrDefaultAsync(a => a.UserEmail == user.UserEmail && a.UserPass == user.UserPass);
+                var loginUser = await db.tblUsers.SingleOrDefaultAsync(u => u.UserEmail == user.UserEmail && u.UserPass == user.UserPass);
 
-                if (adm != null)
+                if (loginUser != null)
                 {
-                    Session["userId"] = adm.UserId;
-                    Session["userName"] = adm.UserName;
-                    return RedirectToAction("Index", "Student");
+                    if (loginUser.IsActive == true)
+                    {
+                        Session["userId"] = loginUser.UserId;
+                        Session["userName"] = loginUser.UserName;
+                        return RedirectToAction("Index", "Student");
+                    }
+                    else
+                    {
+                        ViewBag.Message = "You can't login because you are not active. Please contact admin.";
+                        return View();
+                    }
                 }
                 else
                 {
-                    ViewBag.Message = "User name and password do not match.";
+                    ViewBag.Message = "Email and password do not match.";
                     return View();
                 }
             }
         }
+
 
         public ActionResult Logout()
         {

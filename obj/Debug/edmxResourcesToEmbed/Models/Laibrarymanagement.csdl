@@ -22,24 +22,11 @@
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="BookISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="tblUser">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="UserGender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="UserDep" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="UserAdmNo" Type="Int32" />
-    <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserPass" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-    <Property Name="ResetCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityContainer Name="LaibraryManagementEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tblAdmins" EntityType="Self.tblAdmin" />
     <EntitySet Name="tblTransactions" EntityType="Self.tblTransaction" />
-    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
     <EntitySet Name="tblBooks" EntityType="LaibraryManagementModel.tblBook" />
+    <EntitySet Name="tblUsers" EntityType="LaibraryManagementModel.tblUser" />
   </EntityContainer>
   <EntityType Name="tblBook">
     <Key>
@@ -56,5 +43,19 @@
     <Property Name="Copyright" Type="Int32" />
     <Property Name="DateAdded" Type="DateTime" Precision="3" />
     <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UserGender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UserDep" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UserAdmNo" Type="Int32" />
+    <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserPass" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="ResetCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
   </EntityType>
 </Schema>

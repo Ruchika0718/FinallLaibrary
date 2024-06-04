@@ -50,6 +50,7 @@
     <Property Name="UserEmail" Type="nvarchar" MaxLength="50" />
     <Property Name="UserPass" Type="nvarchar" MaxLength="16" />
     <Property Name="ResetCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
   </EntityType>
   <EntityContainer Name="LaibraryManagementModelStoreContainer">
     <EntitySet Name="tblAdmins" EntityType="Self.tblAdmins" Schema="dbo" store:Type="Tables" />

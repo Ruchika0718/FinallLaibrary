@@ -36,6 +36,7 @@
                     <th>Enrollment No.</th>
                     <th>Email</th>
                     <th>Password</th>
+                    <th>IsActive</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -54,6 +55,7 @@
                             <td>@item.UserAdmNo</td>
                             <td>@item.UserEmail</td>
                             <td>@item.UserPass</td>
+                            <td>@item.IsActive</td>
                             <td>
                                 <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Edit", "User", new { id = item.UserId })'" title="Edit">
                                     <i class="fas fa-edit"></i>

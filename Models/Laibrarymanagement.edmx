@@ -55,6 +55,7 @@
           <Property Name="UserEmail" Type="nvarchar" MaxLength="50" />
           <Property Name="UserPass" Type="nvarchar" MaxLength="16" />
           <Property Name="ResetCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityContainer Name="LaibraryManagementModelStoreContainer">
           <EntitySet Name="tblAdmins" EntityType="Self.tblAdmins" Schema="dbo" store:Type="Tables" />
@@ -88,24 +89,11 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BookISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="tblUser">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="UserGender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="UserDep" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="UserAdmNo" Type="Int32" />
-          <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserPass" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="ResetCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="LaibraryManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblAdmins" EntityType="Self.tblAdmin" />
           <EntitySet Name="tblTransactions" EntityType="Self.tblTransaction" />
-          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
           <EntitySet Name="tblBooks" EntityType="LaibraryManagementModel.tblBook" />
+          <EntitySet Name="tblUsers" EntityType="LaibraryManagementModel.tblUser" />
         </EntityContainer>
         <EntityType Name="tblBook">
           <Key>
@@ -122,6 +110,20 @@
           <Property Name="Copyright" Type="Int32" />
           <Property Name="DateAdded" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserGender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UserDep" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserAdmNo" Type="Int32" />
+          <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserPass" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="ResetCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -153,20 +155,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblUsers">
-            <EntityTypeMapping TypeName="LaibraryManagementModel.tblUser">
-              <MappingFragment StoreEntitySet="tblUsers">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserGender" ColumnName="UserGender" />
-                <ScalarProperty Name="UserDep" ColumnName="UserDep" />
-                <ScalarProperty Name="UserAdmNo" ColumnName="UserAdmNo" />
-                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-                <ScalarProperty Name="UserPass" ColumnName="UserPass" />
-                <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblBooks">
             <EntityTypeMapping TypeName="LaibraryManagementModel.tblBook">
               <MappingFragment StoreEntitySet="tblBooks">
@@ -181,6 +169,21 @@
                 <ScalarProperty Name="BookCategory" ColumnName="BookCategory" />
                 <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
                 <ScalarProperty Name="BookId" ColumnName="BookId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="LaibraryManagementModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUsers">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
+                <ScalarProperty Name="UserPass" ColumnName="UserPass" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserAdmNo" ColumnName="UserAdmNo" />
+                <ScalarProperty Name="UserDep" ColumnName="UserDep" />
+                <ScalarProperty Name="UserGender" ColumnName="UserGender" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

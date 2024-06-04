@@ -15,14 +15,14 @@ namespace FinallLaibrary.Controllers
         LaibraryManagementEntities book = new LaibraryManagementEntities();
         public ActionResult Index()
         {
-            using (var context = new LaibraryManagementEntities())
-            {
-                var books = context.tblBooks.ToList();
-
-                return View(books);
-            }
+            return View(book.tblBooks.ToList());
         }
-
+        // GET: tblBooks Json
+        public ActionResult GetAll()
+        {
+            var booklist = book.tblBooks.ToList();
+            return Json(new { data = booklist }, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Create()
         {
@@ -116,25 +116,21 @@ namespace FinallLaibrary.Controllers
         {
             try
             {
-                // Attempt to find and delete the user
                 tblBook tblBook = book.tblBooks.Find(id);
                 if (tblBook != null)
                 {
                     book.tblBooks.Remove(tblBook);
                     book.SaveChanges();
 
-                    // Return success message
                     return Json(new { success = true, message = "Book deleted successfully." });
                 }
                 else
                 {
-                    // User not found
                     return Json(new { success = false, message = "Book not found." });
                 }
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that occur during the delete process
                 return Json(new { success = false, message = "An error occurred: " + ex.Message });
             }
         }

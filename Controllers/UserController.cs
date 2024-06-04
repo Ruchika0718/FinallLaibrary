@@ -58,18 +58,54 @@ namespace FinallLaibrary.Controllers
                 return View(tblUser);
             }
         }
+        //[HttpPost]
+        //public ActionResult Edit([Bind(Include = "UserId,UserName,UserGender,UserDep,UserAdmNo,UserEmail,UserPass")] tblUser tblUser)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        Session["userAddMsg"] = "User updated successfully";
+        //        user.Entry(tblUser).State = EntityState.Modified;
+        //        user.SaveChanges();
+        //        return RedirectToAction("Index", "User");
+        //    }
+        //    return View(tblUser);
+        //}
+
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,UserGender,UserDep,UserAdmNo,UserEmail,UserPass")] tblUser tblUser)
+        public ActionResult Edit([Bind(Include = "UserId,UserName,UserGender,UserDep,UserAdmNo,UserEmail,UserPass,IsActive")] tblUser tblUser)
         {
             if (ModelState.IsValid)
             {
-                Session["userAddMsg"] = "User updated successfully";
-                user.Entry(tblUser).State = EntityState.Modified;
-                user.SaveChanges();
-                return RedirectToAction("Index", "User");
+                // Retrieve the original user from the database
+                var originalUser = user.tblUsers.Find(tblUser.UserId);
+
+                if (originalUser != null)
+                {
+                    // Update only the properties you want to allow editing
+                    originalUser.UserName = tblUser.UserName;
+                    originalUser.UserGender = tblUser.UserGender;
+                    originalUser.UserDep = tblUser.UserDep;
+                    originalUser.UserAdmNo = tblUser.UserAdmNo;
+                    originalUser.UserEmail = tblUser.UserEmail;
+                    originalUser.UserPass = tblUser.UserPass;
+                    originalUser.IsActive = tblUser.IsActive; // Update IsActive based on the edited value
+
+                    // Save changes to update the user
+                    user.SaveChanges();
+
+                    Session["userAddMsg"] = "User updated successfully";
+                    return RedirectToAction("Index", "User");
+                }
+
+                // User not found in the database
+                ModelState.AddModelError("", "User not found");
+                return View(tblUser);
             }
+
+            // Invalid model state, return to edit view with errors
             return View(tblUser);
         }
+
         public ActionResult Details(int? id)
         {
             if (id == null)
