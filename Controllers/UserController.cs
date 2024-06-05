@@ -18,13 +18,17 @@ namespace FinallLaibrary.Controllers
 
         public ActionResult Index()
         {
-            using (var context = new LaibraryManagementEntities())
-            {
-                var users = context.tblUsers.ToList();
-
-                return View(users);
-            }
+            return View(user.tblUsers.ToList());
         }
+
+        // GET: tblUsers Json
+        public ActionResult GetAll()
+        {
+            var userlist = user.tblUsers.ToList();
+            return Json(new { data = userlist }, JsonRequestBehavior.AllowGet);
+        }
+
+
         public ActionResult Create()
         {
             return View();

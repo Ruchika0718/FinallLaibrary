@@ -10,7 +10,7 @@
         Books List
     </title>
 </head>
-<h4>Book list</h4>x
+<h4>Book list</h4>
 <hr />
 <br />
 <br />
@@ -132,8 +132,15 @@
                 {
                     "data": "DateAdded",
                     "render": function (data) {
-                        var date = new Date(parseInt(data.substr(6)));
-                        return date.toLocaleDateString();
+                        // Ensure data is not null or empty
+                        if (data) {
+                            var date = new Date(parseInt(data.substr(6)));
+                            var formattedDate = date.toLocaleDateString();
+                            var formattedTime = date.toLocaleTimeString();
+                            return formattedDate + ' ' + formattedTime;
+                        } else {
+                            return '';
+                        }
                     }
                 },
                 { "data": "Status" },

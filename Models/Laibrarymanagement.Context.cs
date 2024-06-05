@@ -27,7 +27,7 @@ namespace FinallLaibrary.Models
     
         public virtual DbSet<tblAdmin> tblAdmins { get; set; }
         public virtual DbSet<tblTransaction> tblTransactions { get; set; }
-        public virtual DbSet<tblBook> tblBooks { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
+        public virtual DbSet<tblBook> tblBooks { get; set; }
     }
 }

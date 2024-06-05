@@ -11,19 +11,64 @@ namespace FinallLaibrary.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblBook
     {
         public int BookId { get; set; }
+
+        [DisplayName("Book Name")]
+        [Required(ErrorMessage = "Please enter book name.")]
+        [StringLength(50, MinimumLength = 10)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only letters are allowed.")]
+
         public string BookTitle { get; set; }
+        [DisplayName("Category")]
+        [Required(ErrorMessage = "Please select category.")]
+
         public string BookCategory { get; set; }
+        [DisplayName("Author Name")]
+        [StringLength(50, MinimumLength = 3)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only letters are allowed.")]
+        [Required(ErrorMessage = "Please enter author name.")]
+
+
         public string BookAuthor { get; set; }
+        [DisplayName("Book Copies")]
+        [Required(ErrorMessage = "Please enter book copies.")]
+        [RegularExpression("^(?!0{1,}$).*", ErrorMessage = "Please enter numbers not allowed 0.")]
+
+
         public Nullable<int> BookCopies { get; set; }
+        [DisplayName("Publish Name")]
+        [Required(ErrorMessage = "Please enter publish name.")]
+
         public string BookPub { get; set; }
+        [DisplayName("Publisher Name")]
+        [Required(ErrorMessage = "Please enter publisher name.")]
+
         public string BookPubName { get; set; }
+        [DisplayName("Book No.")]
+        [Required(ErrorMessage = "Please enter book no.")]
+
+
         public string BookISBN { get; set; }
+        [DisplayName("Publish Year")]
+        [Required(ErrorMessage = "Please enter publish year.")]
+        [RegularExpression(@"^(?=(?:\D*\d){0,4}\D*$)[\s\S]{4,50}$", ErrorMessage = "Enter only 4 numbers.")]
+
+
         public Nullable<int> Copyright { get; set; }
-        public Nullable<System.DateTime> DateAdded { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayName("Date")]
+        [Required(ErrorMessage = "Please select date")]
+        [RegularExpression("^(?!00$).*", ErrorMessage = "The value '00' is not allowed.")]
+
+
+        public DateTime DateAdded { get; set; }
+        [DisplayName("Status")]
+        [Required(ErrorMessage = "Please Select status.")]
         public string Status { get; set; }
     }
 }

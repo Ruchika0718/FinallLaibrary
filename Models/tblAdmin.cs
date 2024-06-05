@@ -15,6 +15,9 @@ namespace FinallLaibrary.Models
     public partial class tblAdmin
     {
         public int AdminId { get; set; }
+
+
+
         public string AdminName { get; set; }
         public string AdminEmail { get; set; }
         public string AdminPass { get; set; }

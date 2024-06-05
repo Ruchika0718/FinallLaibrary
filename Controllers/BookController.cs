@@ -1,6 +1,7 @@
 ﻿using FinallLaibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -33,6 +34,12 @@ namespace FinallLaibrary.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (book.tblBooks.Any(b => b.BookISBN == tblBook.BookISBN))
+                {
+                    ModelState.AddModelError("BookISBN", "Book  number must be unique.");
+                    return View(tblBook);
+                }
+
                 tblBook.DateAdded = DateTime.Now; // Format as a string
 
                 Session["bookAddMsg"] = "Book Added Successfully";
