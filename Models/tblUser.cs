@@ -11,15 +11,35 @@ namespace FinallLaibrary.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblUser
     {
         public int UserId { get; set; }
+        [DisplayName("Name")]
+        [Required(ErrorMessage = "Please enter name.")]
+
         public string UserName { get; set; }
+        [DisplayName("Gender")]
+        [Required(ErrorMessage = "Please select gender.")]
         public string UserGender { get; set; }
+        [DisplayName("Department")]
+        [Required(ErrorMessage = "Please enter department.")]
+
         public string UserDep { get; set; }
+        [DisplayName("Enrollment No.")]
+        [Required(ErrorMessage = "Please enter enrollment no.")]
         public Nullable<int> UserAdmNo { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [DisplayName("Email")]
+        [Required(ErrorMessage = "Please enter email id.")]
         public string UserEmail { get; set; }
+        [DisplayName("Password")]
+        [Required(ErrorMessage = "Please enter password.")]
+        [StringLength(16, ErrorMessage = "Enter minimum 8 characters.", MinimumLength = 8)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$", ErrorMessage = "The password must contain at least one uppercase letter, one lowercase letter, and one number.")]
+
         public string UserPass { get; set; }
         public string ResetCode { get; set; }
         public Nullable<bool> IsActive { get; set; }

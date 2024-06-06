@@ -45,7 +45,7 @@ namespace FinallLaibrary.Controllers
                     UserAdmNo = tbl.UserAdmNo,
                     UserEmail = tbl.UserEmail,
                     UserPass = tbl.UserPass,
-                    IsActive = true  // Set IsActive to true by default
+                    IsActive = true  
                 };
 
                 user.tblUsers.Add(newUser);
