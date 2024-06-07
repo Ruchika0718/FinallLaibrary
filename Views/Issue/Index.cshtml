@@ -10,72 +10,129 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
 <link rel="stylesheet" href=" ://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 <div class="card mb-4 mt-4">
     <div class="card-header">
         <i class="fas fa-table me-1"></i>
-        <span class="fs-5">BookList</span>
+        <span class="fs-5">Book List</span>
+
     </div>
     <div class="card-body table-responsive">
-        <table class="table table-bordered text-center" id="example">
-            <thead>
+        <table width="100%" class="table-sm table-hover table-bordered" id="example">
+            <thead class="bg-success text-light">
                 <tr>
-                    <th>Sr. No.</th>
-                    <th>Book Title</th>
-                    <th>Category</th>
-                    <th>Author</th>
-                    <th>Copies</th>
-                    <th>Publisher</th>
-                    <th>Name</th>
-                    <th>No.</th>
-                    <th>Copyright</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookCategory)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookAuthor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookCopies)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookPub)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookPubName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookISBN)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Copyright)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th style="margin-right:20px;">
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                @{ int i = 1;}
-                @if (Model != null)
-                {
-                    foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@i</td>
-                            @{ i++;}
-                            <td>@item.BookTitle</td>
-                            <td>@item.BookCategory</td>
-                            <td>@item.BookAuthor</td>
-                            <td>@item.BookCopies</td>
-                            <td>@item.BookPub</td>
-                            <td>@item.BookPubName</td>
-                            <td>@item.BookISBN</td>
-                            <td>@item.Copyright</td>
-                            <td>@item.DateAdded</td>
-                            <td>@item.Status</td>
+                <tr>
+                    <th>
+                        BookTitle
+                    </th>
+                    <th>
+                        category
+                    </th>
+                    <th>
+                        Author
+                    </th>
+                    <th>
+                        Copies
+                    </th>
+                    <th>
+                        Publisher
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        No.
+                    </th>
+                    <th>
+                        Copyright
+                    </th>
 
-                            <td>
-                                <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Issue", "Issue", new { bookId = item.BookId })'">
-                                    <i class="fas fa-hand-point-up"></i> Request
-                                </button>
-
-                            </td>
-                        </tr>
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="11">No data found</td>
-                    </tr>
-                }
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
             </tbody>
         </table>
     </div>
 </div>
 
 <br />
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "ajax": {
+                "url": "/Issue/GetAll",
+                "type": "get",
+                "datatype": "json",
+            },
+            "columns": [
+                { "data": "BookTitle" },
+                { "data": "BookCategory" },
+                { "data": "BookAuthor" },
+                { "data": "BookCopies" },
+                { "data": "BookPub" },
+                { "data": "BookPubName" },
+                { "data": "BookISBN" },
+                { "data": "Copyright" },
+                { "data": "Status" },
+                {
+                    "data": "BookId", "render": function (idhere) {
+                        return "<a class='btn btn-sm btn-outline-primary text-blue' data-toggle='tooltip' title='Edit' href='@Url.Action("Edit", "Book")/" + idhere + "'> <i class='fas fa-edit'></i> </a> " +
+                               "<a class='btn btn-sm btn-outline-success text-success' data-toggle='tooltip' title=' Details' href='@Url.Action("Details", "Book")/" + idhere + "'> <i class='fas fa-info-circle'></i> </a> " +
+                               "<a class='btn btn-sm btn-outline-danger text-danger' data-toggle='tooltip' title='Delete ' onclick='Delete(" + idhere + ")'> <i class='fas fa-trash'></i> </a>";
+                    },
+                    "orderable": false,
+                    "width": "245px"
+                }
+            ],
+            "language": {
+                "emptyTable": "No data found, Add new items"
+            }
+        });
 
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
 
+}

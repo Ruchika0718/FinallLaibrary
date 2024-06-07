@@ -23,7 +23,6 @@
     </style>
 </head>
 <body style="padding:unset">
-
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -97,11 +96,16 @@
                             <div class="form-group fw-bold">
                                 @Html.LabelFor(model => model.UserPass, htmlAttributes: new { @class = "" })
                                 <div class="input-group">
-                                    @Html.EditorFor(model => model.UserPass, new { htmlAttributes = new { @class = "form-control ", placeholder = "Enter the password", type = "password" } })
+                                    @Html.EditorFor(model => model.UserPass, new { htmlAttributes = new { @class = "form-control ", placeholder = "Enter the password", type = "password" , id = "myInput" } })
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" style="height:40px" ;>
+                                            <input type="checkbox" onclick="myFunction()">
+                                        </span>
+                                    </div>
                                 </div>
                                 @Html.ValidationMessageFor(model => model.UserPass, "", new { @class = "text-danger" })
                             </div>
-                          
+
                             <div class="form-group">
                                 <p class="text-danger">@ViewBag.Message</p>
                             </div>
@@ -125,6 +129,15 @@
     }
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+    function myFunction() {
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }</script>
 </body>
 </html>
 

@@ -35,6 +35,9 @@
                 @Html.DisplayNameFor(model => model.UserPass)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
                 Actions
             </th>
         </tr>
@@ -59,7 +62,9 @@
             <th>
                 Password
             </th>
-
+            <th>
+                IsActive
+            </th>
         </tr>
     </tbody>
 </table>
@@ -85,6 +90,7 @@
                     { "data": "UserAdmNo" },
                     { "data": "UserEmail" },
                     { "data": "UserPass" },
+                    {"data": "IsActive"},
                     {
                         "data": "UserId", "render": function (idhere) {
 

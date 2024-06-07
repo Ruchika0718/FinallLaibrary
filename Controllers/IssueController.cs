@@ -38,8 +38,15 @@ namespace FinallLaibrary.Controllers
                     return View(db.tblBooks.ToList());
                 }
             }
+    
+        public ActionResult GetAll()
+        {
+            var booklist = book.tblBooks.ToList();
+            return Json(new { data = booklist }, JsonRequestBehavior.AllowGet);
+        }
 
-            public ActionResult MenuBorrow()
+
+        public ActionResult MenuBorrow()
             {
                 return RedirectToAction("Index", "Issue", new { userId = userId, userName = userName });
             }

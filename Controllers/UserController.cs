@@ -36,10 +36,20 @@ namespace FinallLaibrary.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "UserId,UserName,UserGender,UserDep,UserAdmNo,UserEmail,UserPass")] tblUser tblUser)
         {
+            var newUser = new tblUser
+            {
+                UserName = tblUser.UserName,
+                UserGender = tblUser.UserGender,
+                UserDep = tblUser.UserDep,
+                UserAdmNo = tblUser.UserAdmNo,
+                UserEmail = tblUser.UserEmail,
+                UserPass = tblUser.UserPass,
+                IsActive = true
+            };
             if (ModelState.IsValid)
             {
                 Session["userAddMsg"] = "User Added Successfully";
-                user.tblUsers.Add(tblUser);
+                user.tblUsers.Add(newUser);
                 user.SaveChanges();
                 return RedirectToAction("Index", "User");
             }
